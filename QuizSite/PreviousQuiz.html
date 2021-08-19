@@ -1,0 +1,54 @@
+
+<html lang="en">
+
+    <head> 
+        <title> QuizSite  </title>
+        <link href="main.css" rel="stylesheet">
+        <link rel="icon" href="images/icon.png" type="image/gif" >
+    </head>
+    
+    <body onload="printList()">
+    
+    <!-- Reuesable Container -->    
+    <div id="quiz_box">
+    
+    <form action="" method="post">
+             <h1 class="centerText">Quiz List</h1>  
+             <div id="get-detail"></div>
+             <div id="get-quiz"></div>
+             
+    </form>    
+    </body>    
+    </html>
+
+
+    <script>
+
+      function printList() { 
+        var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+              if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("get-quiz").innerHTML = this.responseText;
+              }
+            };
+            xmlhttp.open("post", "generate_quiz.php", true);
+            xmlhttp.send();
+      }
+
+            function showDetails(quizId){
+              var xmlhttpDetail = new XMLHttpRequest();
+              xmlhttpDetail.onreadystatechange = function() {
+              if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("get-detail").innerHTML = this.responseText;
+                togglePopup();
+              }
+            };
+            xmlhttpDetail.open("post", "showDetail.php?quiz="+quizId, true);
+            xmlhttpDetail.send();
+            }
+
+            function togglePopup(){
+  document.getElementById("popup-1").classList.toggle("active");
+}
+
+     </script>
